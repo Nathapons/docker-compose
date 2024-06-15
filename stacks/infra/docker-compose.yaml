@@ -3,47 +3,10 @@ version: "3.8"
 x-file-path: &file-path ./../../config/services.yaml
 
 services:
-  redis:
+  sqlserver:
     extends:
       file: *file-path
-      service: redis
-    networks:
-      - infra
-
-  rabbitmq:
-    extends:
-      file: *file-path
-      service: rabbitmq
-    networks:
-      - infra
-    volumes:
-      - ./rabbitmq-data:/var/lib/rabbitmq
-
-  mongo:
-    extends:
-      file: *file-path
-      service: mongo
-    networks:
-      - infra
-
-  influx:
-    extends:
-      file: *file-path
-      service: influx
-    networks:
-      - infra
-
-  mysql:
-    extends:
-      file: *file-path
-      service: mysql
-    networks:
-      - infra
-
-  phpmyadmin:
-    extends:
-      file: *file-path
-      service: phpmyadmin
+      service: sqlserver
     networks:
       - infra
 
