@@ -9,19 +9,48 @@ services:
       service: portainer
     networks:
       - admin
-    volumes:
-      - ./data/portainer:/data
-      - /var/run/docker.sock:/var/run/docker.sock
 
-  yacht:
+  portainer_agent:
     extends:
       file: *file-path
-      service: yacht
+      service: portainer_agent
     networks:
       - admin
-    volumes:
-      - ./data/yacht:/config
-      - /var/run/docker.sock:/var/run/docker.sock
+
+  mysql:
+    extends:
+      file: *file-path
+      service: mysql
+    networks:
+      - admin
+
+  phpmyadmin:
+    extends:
+      file: *file-path
+      service: phpmyadmin
+    networks:
+      - admin
+
+  redis:
+    extends:
+      file: *file-path
+      service: redis
+    networks:
+      - admin
+
+  postgres:
+    extends:
+      file: *file-path
+      service: postgres
+    networks:
+      - admin
+
+  pgadmin:
+    extends:
+      file: *file-path
+      service: pgadmin
+    networks:
+      - admin
 
 networks:
   admin:
