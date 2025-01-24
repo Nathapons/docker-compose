@@ -38,6 +38,13 @@ services:
     networks:
       - admin
 
+  redis-commander:
+    extends:
+      file: *file-path
+      service: redis-commander
+    networks:
+      - admin
+
   postgres:
     extends:
       file: *file-path
