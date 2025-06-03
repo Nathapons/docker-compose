@@ -24,6 +24,20 @@ services:
     networks:
       - admin
 
+  pgadmin:
+    extends:
+      file: *file-path
+      service: pgadmin
+    networks:
+      - admin
+
+  postgres:
+    extends:
+      file: *file-path
+      service: postgres
+    networks:
+      - admin
+
   redis:
     extends:
       file: *file-path
