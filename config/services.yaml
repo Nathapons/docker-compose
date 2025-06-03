@@ -18,6 +18,11 @@ services:
     image: portainer/agent:2.21.5
     container_name: portainer_agent
     restart: always
+    enviroment:
+      - AGENT_CLUSTER_ADDR=tls://portainer:9001
+      - AGENT_CLUSTER_CA=/var/run/docker.sock
+      - AGENT_CLUSTER_CERT=/var/run/docker.sock
+      - AGENT_CLUSTER_KEY=/var/run/docker.sock
     ports:
       - "9001:9001"
     volumes:
