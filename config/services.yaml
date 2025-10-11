@@ -200,3 +200,22 @@ services:
     command:
       - '--config.file=/etc/prometheus/prometheus.yml'
       - '--storage.tsdb.path=/prometheus'
+
+  jenkins:
+    # Please run command "docker exec jenkins-con cat /var/jenkins_home/secrets/initialAdminPassword" after up docker compoe
+    <<: *base
+    image: jenkins/jenkins:lts
+    container_name: jenkins-con
+    hostname: jenkins
+    privileged: true
+    user: root
+    ports:
+      - "8080:8080"
+      - "50000:50000"
+    volumes:
+      - jenkins_home:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+
+volumes:
+  jenkins_home
