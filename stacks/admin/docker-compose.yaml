@@ -3,55 +3,17 @@ version: "3.8"
 x-file-path: &file-path ./../../config/services.yaml
 
 services:
-  portainer:
+  jenkins:
     extends:
       file: *file-path
-      service: portainer
-    networks:
-      - admin
-
-  portainer_agent:
-    extends:
-      file: *file-path
-      service: portainer_agent
-    networks:
-      - admin
-
-  mysql:
-    extends:
-      file: *file-path
-      service: mysql
-    networks:
-      - admin
-
-  pgadmin:
-    extends:
-      file: *file-path
-      service: pgadmin
-    networks:
-      - admin
-
-  postgres:
-    extends:
-      file: *file-path
-      service: postgres
-    networks:
-      - admin
-
-  redis:
-    extends:
-      file: *file-path
-      service: redis
-    networks:
-      - admin
-
-  redis-commander:
-    extends:
-      file: *file-path
-      service: redis-commander
+      service: jenkins
     networks:
       - admin
 
 networks:
   admin:
     driver: bridge
+
+volumes:
+  jenkins_home:
+    driver: local
