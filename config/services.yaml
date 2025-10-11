@@ -202,20 +202,21 @@ services:
       - '--storage.tsdb.path=/prometheus'
 
   jenkins:
-    # Please run command "docker exec jenkins-con cat /var/jenkins_home/secrets/initialAdminPassword" after up docker compoe
+    # Please run command "docker exec jenkins-con cat /var/jenkins_home/secrets/initialAdminPassword" after up docker compose
     <<: *base
-    image: jenkins/jenkins:lts
+    image: jenkins/jenkins:jdk21
     container_name: jenkins-con
     hostname: jenkins
-    privileged: true
-    user: root
-    ports:
-      - "8080:8080"
-      - "50000:50000"
     volumes:
-      - jenkins_home:/var/jenkins_home
-      - /var/run/docker.sock:/var/run/docker.sock
-    restart: unless-stopped
+      - ../tmp/jenkins_home:/var/jenkins_home # เพื่อให้ Jenkins สามารถเก็บข้อมูลไว้ใน host
+      - /var/run/docker.sock:/var/run/docker.sock # เพื่อให้ Jenkins สามารถใช้งาน Docker daemon ที่รันบน host ได้
+    environment:
+      - JENKINS_ADMIN_ID=admin
+      - JENKINS_ADMIN_PASSWORD=jenkins12345
+      - JENKINS_OPTS=--httpPort=8800 # กำหนด Port สำหรับ Jenkins UI
+    ports:
+      - "8800:8800" # สำหรับ Jenkins UI
+    restart: always
 
 volumes:
   jenkins_home
