@@ -204,7 +204,10 @@ services:
   jenkins:
     # Please run command "docker exec jenkins-con cat /var/jenkins_home/secrets/initialAdminPassword" after up docker compose
     <<: *base
-    image: jenkins/jenkins:jdk21
+    build: 
+      context: .
+      dockerfile: ../context/Dockerfile.jenkins-node
+    image: jenkins-with-docker:jdk21
     container_name: jenkins-con
     hostname: jenkins
     volumes:
